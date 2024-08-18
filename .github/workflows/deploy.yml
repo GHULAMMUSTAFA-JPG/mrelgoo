@@ -1,0 +1,53 @@
+name: Deploy Node.js Application
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Ensure .next directory can be removed
+        run: sudo chmod -R 777 /var/www/mrelgoo-frontend/_work/mrelgoo-frontend/mrelgoo-frontend/.next || true
+
+      - name: Set execute permissions
+        run: sudo chmod +x -R /var/www/mrelgoo-frontend/_work/mrelgoo-frontend/mrelgoo-frontend
+
+      - name: Ensure .next directory can be removed
+        run: sudo rm -rf /var/www/mrelgoo-frontend/_work/mrelgoo-frontend/mrelgoo-frontend/.next
+        
+      - name: Set permissions for runner user
+        run: sudo chown -R $USER:$USER /var/www/mrelgoo-frontend/_work/mrelgoo-frontend/mrelgoo-frontend
+             
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set permissions
+        run:  sudo chmod +x -R /var/www/mrelgoo-frontend/_work/mrelgoo-frontend/mrelgoo-frontend
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Change this to Node.js 20.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Npm run build
+        run: npm run build
+
+      - name: pm2 stop frontend
+        run: sudo pm2 stop frontend #set the pm2 id if there has multiple websites
+
+      - name: pm2 start frontend
+        run: sudo pm2 start frontend
+
+      - name: pm2 save
+        run: pm2 save
+
+      - name: nginx restart
+        run: sudo service nginx restart

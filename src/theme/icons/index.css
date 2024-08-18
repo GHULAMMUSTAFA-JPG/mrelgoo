@@ -1,0 +1,31 @@
+.black > path {
+  fill: #0a2a41;
+}
+
+.primary > path {
+  fill: #008cd9;
+}
+
+.red > path {
+  fill: #e10000;
+}
+
+.green > path {
+  fill: #2eb86e;
+}
+
+.orange > path {
+  fill: #fec000;
+}
+
+.line > path {
+  fill: #e5e5e5;
+}
+
+.inactive > path {
+  fill: #7f7f7f;
+}
+
+.white > path {
+  fill: #ffffff;
+}

@@ -1,0 +1,6 @@
+/_data/
+/node_modules/
+/public/
+.next/cache
+.next/server
+.next/static
