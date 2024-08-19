@@ -143,38 +143,38 @@ export default function Checkout() {
 
     console.log(data)
     // Zepto mail
-    const { error: mailError, data: mailData } = await sendZepto({
-      name: values?.name,
-      email: values?.email,
-      subject: 'Order received.',
-      template:
-        '2d6f.6d84fecd3129a058.k1.6ccb7eb0-e874-11ee-a154-525400ae9113.18e6747821b',
-      merge_info: {
-        Order_ID: data?.uid,
-        name: values.name,
-      },
-    })
-    console.log(mailError)
-    console.log(mailData)
-    if (mailError) {
-      toast({
-        position: 'top-right',
-        title: 'Update failed.',
-        description: JSON.stringify(mailError),
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      })
-    } else {
-      toast({
-        position: 'top-right',
-        title: 'The email was sent successfully.',
-        description: JSON.stringify(mailData),
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      })
-    }
+    // const { error: mailError, data: mailData } = await sendZepto({
+    //   name: values?.name,
+    //   email: values?.email,
+    //   subject: 'Order received.',
+    //   template:
+    //     '2d6f.6d84fecd3129a058.k1.6ccb7eb0-e874-11ee-a154-525400ae9113.18e6747821b',
+    //   merge_info: {
+    //     Order_ID: data?.uid,
+    //     name: values.name,
+    //   },
+    // })
+    // console.log(mailError)
+    // console.log(mailData)
+    // if (mailError) {
+    //   toast({
+    //     position: 'top-right',
+    //     title: 'Update failed.',
+    //     description: JSON.stringify(mailError),
+    //     status: 'error',
+    //     duration: 5000,
+    //     isClosable: true,
+    //   })
+    // } else {
+    //   toast({
+    //     position: 'top-right',
+    //     title: 'The email was sent successfully.',
+    //     description: JSON.stringify(mailData),
+    //     status: 'success',
+    //     duration: 5000,
+    //     isClosable: true,
+    //   })
+    // }
     if (error) {
       console.log(error)
       alert(error.data?.message)
